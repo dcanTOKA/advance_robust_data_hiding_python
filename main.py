@@ -1,7 +1,6 @@
-from data import *
-from utils import *
 from bit_coding_algorith import *
-
+from data import *
+from kn_secret_sharing import *
 
 images = Images()
 
@@ -21,3 +20,11 @@ bit_plane = Bitplane(red_cover, green_cover, blue_cover, secret)
 recombined_image = bit_plane.create_stego_image()
 
 recombined_image.show()
+
+k = 5
+n = 8
+recons = 4
+
+kn_secret_sharing = KnSharing(k, n, recons)
+
+shares = kn_secret_sharing.create_shares(recombined_image)

@@ -1,5 +1,6 @@
 import numpy as np
 from PIL import Image
+from utils import *
 
 
 class Bitplane:
@@ -36,11 +37,8 @@ class Bitplane:
         new_b = self.bit_plane_coding(self.blue_cover_bit_plains, self.bit_plane_to_code, self.secret_bit_planes,
                                       self.third_msb_choice_of_secret)
 
-        r = Image.fromarray(np.uint8(new_r))
-        g = Image.fromarray(np.uint8(new_g))
-        b = Image.fromarray(np.uint8(new_b))
-
-        return Image.merge("RGB", (r, g, b))
+        
+        return image_from_array(new_r, new_g, new_b)
 
     def bit_plane_coding(self, bit_plane, cover_index, secret_plain, secret_index):
         bit_plane[cover_index, :, :] = secret_plain[secret_index, :, :]
