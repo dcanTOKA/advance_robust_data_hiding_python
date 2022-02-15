@@ -2,6 +2,7 @@ import numpy as np
 from PIL import Image
 from random import seed
 from random import randint
+from tqdm import tqdm
 
 seed(1)
 
@@ -48,11 +49,10 @@ def bit_stream_of_24_to_image(bit_stream, N, D):
 
 
 def bin_to_dec(bin_list):
-    dec_list = np.array([])
-    for ele in range(len(bin_list)):
-        dec_list = np.append(dec_list, bin_list[ele].dot(2 ** np.arange(bin_list[ele].size)[::-1]))
+    dec_list = np.zeros(bin_list.shape[0])
+    for ele in tqdm(range(len(bin_list)), desc="BIN TO DEC : "):
+        dec_list[ele] = bin_list[ele].dot(2 ** np.arange(bin_list[ele].size)[::-1])
 
-    print(dec_list)
     return dec_list
 
 

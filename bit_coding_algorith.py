@@ -17,7 +17,8 @@ class Bitplane:
         self.blue_cover_bit_plains = self.bit_plain_generator(blue_cover).astype(int)
         self.secret_bit_planes = self.bit_plain_generator(secret).astype(int)
 
-    def bit_plain_generator(self, image):
+    @staticmethod
+    def bit_plain_generator(image):
         N, D = image.size
         image_bit_planes = np.unpackbits(image, axis=1).reshape(N * D, 8)
         number_of_plane = image_bit_planes.shape[-1]
@@ -37,7 +38,6 @@ class Bitplane:
         new_b = self.bit_plane_coding(self.blue_cover_bit_plains, self.bit_plane_to_code, self.secret_bit_planes,
                                       self.third_msb_choice_of_secret)
 
-        
         return image_from_array(new_r, new_g, new_b)
 
     def bit_plane_coding(self, bit_plane, cover_index, secret_plain, secret_index):
