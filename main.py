@@ -34,13 +34,13 @@ kn_secret_sharing = KnSharing(recombined_image, k, n, recons)
 
 shares = kn_secret_sharing.create_shares()
 
-#decrypt_shares = kn_secret_sharing.decrypt_shares()
-
 steganography = LsbReplacement(shares, envelopes, n)
 
 steganography.lsb_replace()
 
 taken = steganography.lsb_retrieve()
 
-decrypt_shares = kn_secret_sharing.decrypt_shares(taken)
+decrypted_cover = kn_secret_sharing.decrypt_share(taken)
+
+reconstructed_secret = bit_plane.bit_plane_decoding(decrypted_cover)
 
